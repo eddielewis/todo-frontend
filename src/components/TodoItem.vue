@@ -1,18 +1,8 @@
 <template>
-  <div class="card flex-row" v-bind:class="{'is-complete':todo.completed}">
-    <!--
-    <p>
-      <input type="checkbox" v-on:change="markComplete" />
-      {{ todo.title }}
-      <button @click="$emit('del-todo', todo.id)" class="del">X</button>
-    </p>
-    -->
+  <div class="todo-item card flex-row" v-bind:class="{'is-complete':todo.completed}">
     <span class="p-3 mr-auto">{{ todo.title }}</span>
     <div class="buttons flex-grow-0 d-flex">
-      <button
-        @click="$emit('del-todo', todo.id)"
-        class="remove todo-item-button border-0 bg-transparent h-100"
-      >
+      <button @click="$emit('del-todo', todo.id)" class="remove border-0 bg-transparent h-100">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -51,7 +41,7 @@
           </g>
         </svg>
       </button>
-      <button @click="markComplete" class="complete todo-item-button border-0 bg-transparent h-100">
+      <button @click="markComplete" class="complete border-0 bg-transparent h-100">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -89,5 +79,61 @@ export default {
 <style scoped>
 .is-complete {
   text-decoration: line-through;
+}
+.buttons button:not(:first-child)::before {
+  content: "";
+  width: 1px;
+  height: 30px;
+  position: absolute;
+  top: calc(50% - 15px);
+  left: 0;
+  background: #d8e5e0;
+}
+
+button {
+  width: 50px;
+  position: relative;
+}
+
+button svg {
+  width: 22px;
+  height: 22px;
+  top: calc(50% - 11px);
+  left: calc(50% - 11px);
+  position: absolute;
+}
+
+.buttons button svg .fill {
+  transition: fill 0.2s ease;
+}
+
+button.remove svg {
+  fill: #c0cecb;
+}
+
+button.remove:hover svg {
+  fill: #e85656;
+}
+
+button.complete svg {
+  border-radius: 11px;
+  border: 1.5px solid #25b99a;
+  transition: background 0.2s ease;
+}
+
+button.complete svg .fill {
+  fill: #25b99a;
+}
+
+button.complete:hover svg {
+  background: rgba(37, 185, 154, 0.5);
+}
+
+button.complete:hover svg .fill {
+  fill: #ffffff;
+}
+
+svg .no-fill {
+  fill: none;
 }
 </style>
