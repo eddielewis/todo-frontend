@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column align-items-center">
     <b-form inline @submit="addTodo" id="add-todo" class="mt-4">
-      <b-form-input type="text" v-model="title" class="mr-sm-2" placeholder="Add item" />
+      <b-form-input type="text" class="mr-sm-2" placeholder="Add item" />
       <b-button type="submit" variant="outline-success">Add</b-button>
     </b-form>
     <div>
@@ -31,7 +31,9 @@ export default {
       e.preventDefault();
       const newTodo = {
         title: this.title,
-        completed: false
+        body: "",
+        show_checkboxes: false,
+        is_archived: false
       };
       this.$emit("add-todo", newTodo);
       this.title = "";

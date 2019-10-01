@@ -9,6 +9,9 @@
 import Header from "./components/layout/Header.vue";
 import axios from "axios";
 
+import Vuex from "vuex";
+import db from "@/main";
+
 export default {
   name: "app",
   components: {
@@ -22,17 +25,18 @@ export default {
   methods: {
     deleteTodo(id) {
       axios
-        .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        .delete(`http://127.0.0.1:8000/api/${id}`)
         .then((this.todoList = this.todoList.filter(todo => todo.id !== id)))
         .catch(err => console.log(err));
     },
-    addTodo(newTodo) {
-      const { title, completed } = newTodo;
-
+    addTodo(newTodoTitle) {
+      console.log(newTodoTitle);
       axios
-        .post("https://jsonplaceholder.typicode.com/todos", {
-          title,
-          completed
+        .post("http://127.0.0.1:8000/api/", {
+          title: newTodoTitle,
+          body: "",
+          show_checkboxes: false,
+          is_archived: false
         })
         .then(res => (this.todoList = [...this.todoList, res.data]))
         .catch(err => console.log(err));
@@ -40,10 +44,11 @@ export default {
   },
   created() {
     axios
-      .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .get("http://127.0.0.1:8000/api/")
       .then(res => (this.todoList = res.data))
       .catch(err => console.log(err));
-  }
+  },
+  completeItem(id, j) {}
 };
 </script>
 

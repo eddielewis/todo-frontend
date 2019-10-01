@@ -26,7 +26,7 @@ svg {
   left: calc(50% - 11px);
   position: absolute;
   border-radius: 11px;
-  border: 1.5px solid #25b99a;
+  border: 2px solid #25b99a;
   transition: background 0.2s ease;
 }
 *:hover > svg {
